@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>看書 Kanshu — Chinese Reader for iOS</title>
+    <style>
+        :root {
+            --bg: #fffbf7;
+            --text: #2d1a0e;
+            --muted: #8b6f5c;
+            --accent: #e07422;
+            --accent-dark: #c45e10;
+            --accent-light: #fff4eb;
+            --border: #f0e0d0;
+            --card-bg: #ffffff;
+            --bookmark: #d63b2f;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #1a0f08;
+                --text: #faf5f0;
+                --muted: #b8a090;
+                --accent: #e88a3a;
+                --accent-dark: #f09840;
+                --accent-light: #2a1a0e;
+                --border: #3a2a1e;
+                --card-bg: #241a10;
+                --bookmark: #e04a3e;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 60px 24px 48px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .app-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 26px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+        }
+
+        .app-name {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 4px;
+        }
+
+        .app-name .kanji {
+            color: var(--accent);
+        }
+
+        .tagline {
+            font-size: 17px;
+            color: var(--muted);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        /* Features */
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 48px;
+        }
+
+        .feature {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            transition: border-color 0.2s;
+        }
+
+        .feature:hover {
+            border-color: var(--accent);
+        }
+
+        .feature-icon {
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+
+        .feature-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .feature-desc {
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.4;
+        }
+
+        @media (max-width: 480px) {
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        .section p, .section li {
+            font-size: 15px;
+            color: var(--muted);
+            line-height: 1.65;
+        }
+
+        .section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .section ul li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section ul li:last-child {
+            border-bottom: none;
+        }
+
+        .section ul li strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        /* Contact */
+        .contact-card {
+            background: var(--accent-light);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .contact-card p {
+            font-size: 15px;
+            color: var(--muted);
+            margin-bottom: 12px;
+        }
+
+        .contact-email {
+            display: inline-block;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .contact-email:hover {
+            text-decoration: underline;
+        }
+
+        .contact-card .bookmark-accent {
+            display: inline-block;
+            width: 3px;
+            height: 18px;
+            background: var(--bookmark);
+            border-radius: 0 0 2px 2px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        /* Privacy */
+        .privacy {
+            margin-bottom: 40px;
+        }
+
+        .privacy p {
+            font-size: 14px;
+            color: var(--muted);
+            margin-bottom: 12px;
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        /* App Store Badge */
+        .badge-link {
+            display: inline-block;
+            margin-top: 16px;
+        }
+
+        .badge-link img {
+            height: 44px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Header -->
+        <header class="header">
+            <!-- Replace icon.png with your app icon file -->
+            <img src="icon.png" alt="Kanshu App Icon" class="app-icon">
+            <h1 class="app-name"><span class="kanji">看書</span> Kanshu</h1>
+            <p class="tagline">Read Chinese books with tap-to-learn definitions, pinyin, grammar notes, and adaptive coaching.</p>
+
+            <!-- Uncomment once your app is live on the App Store -->
+            <!--
+            <a href="https://apps.apple.com/app/idYOUR_APP_ID" class="badge-link">
+                <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
+            </a>
+            -->
+        </header>
+
+        <!-- Features -->
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">📖</div>
+                <div class="feature-title">Tap to Learn</div>
+                <div class="feature-desc">Tap any word for pinyin, definitions, HSK level, and grammar notes.</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🧠</div>
+                <div class="feature-title">Adaptive Coach</div>
+                <div class="feature-desc">AI-powered reading coach that generates exercises based on your struggles.</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📚</div>
+                <div class="feature-title">Import Anything</div>
+                <div class="feature-desc">Read EPUB, PDF, plain text, or import directly from web URLs.</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🔁</div>
+                <div class="feature-title">Spaced Repetition</div>
+                <div class="feature-desc">SM-2 flashcards that surface saved words right when you need to review them.</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🔒</div>
+                <div class="feature-title">Works Offline</div>
+                <div class="feature-desc">120k-entry dictionary and grammar notes bundled — no internet required.</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🗣️</div>
+                <div class="feature-title">Listen & Speak</div>
+                <div class="feature-desc">Premium Chinese TTS voices and Apple Translation built in.</div>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="section">
+            <h2 class="section-title">FAQ</h2>
+            <ul>
+                <li><strong>What Chinese level do I need?</strong> Kanshu works for all levels — from HSK 1 beginners to advanced readers. Set your HSK level during onboarding and the coach adapts to you.</li>
+                <li><strong>Does it work offline?</strong> Yes. The core reader, dictionary, and grammar notes all work without an internet connection. Cloud AI features are optional.</li>
+                <li><strong>What AI features are available?</strong> On-device AI (Apple Intelligence, iOS 26+) and cloud providers (Claude, OpenAI, Gemini) for contextual grammar explanations. All are optional enhancements.</li>
+                <li><strong>What file formats can I import?</strong> EPUB, PDF, plain text (.txt), and web URLs with automatic encoding detection for Chinese sites.</li>
+            </ul>
+        </div>
+
+        <!-- Contact / Support -->
+        <div class="contact-card">
+            <p>Have a question, found a bug, or want to suggest a feature?</p>
+            <a href="mailto:patelpriyesh@hotmail.com" class="contact-email">patelpriyesh@hotmail.com</a>
+        </div>
+
+        <!-- Privacy Policy -->
+        <div class="privacy section" id="privacy">
+            <h2 class="section-title">Privacy Policy</h2>
+            <p><em>Last updated: March 15, 2026</em></p>
+            <p>Kanshu ("the App") is developed by Priyesh. Your privacy is important to us. This policy explains what data the App collects and how it is used.</p>
+            <p><strong>Data stored on your device.</strong> All reading data — books, saved words, bookmarks, highlights, reading progress, coaching data, and flashcard schedules — is stored locally on your device using Apple's SwiftData framework. This data is not transmitted to any server.</p>
+            <p><strong>Optional cloud AI features.</strong> If you choose to enable cloud AI providers (Anthropic Claude, OpenAI, or Google Gemini), text snippets from your current reading may be sent to those providers to generate grammar explanations. This only happens when you explicitly request it (e.g., tapping a word with cloud AI enabled). API keys for these services are stored locally on your device and are never shared with us.</p>
+            <p><strong>Apple services.</strong> The App may use Apple's on-device translation and intelligence features (iOS 17.4+ / iOS 26+). These are processed on-device or by Apple according to Apple's own privacy policies.</p>
+            <p><strong>No accounts or analytics.</strong> Kanshu does not require an account, does not collect personal information, and does not include any third-party analytics or advertising SDKs.</p>
+            <p><strong>No data sharing.</strong> We do not sell, share, or transfer your data to third parties.</p>
+            <p><strong>Changes to this policy.</strong> If this policy is updated, the revised version will be posted on this page with an updated date.</p>
+            <p><strong>Contact.</strong> For privacy-related questions, email <a href="mailto:patelpriyesh@hotmail.com" style="color: var(--accent);">patelpriyesh@hotmail.com</a>.</p>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2026 Priyesh. All rights reserved.</p>
+        </footer>
+
+    </div>
+</body>
+</html>
