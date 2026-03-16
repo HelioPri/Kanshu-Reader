@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth; scroll-padding-top: 60px;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide — 看書 Kanshu</title>
+    <style>
+        :root {
+            --bg: #fffbf7;
+            --text: #2d1a0e;
+            --muted: #8b6f5c;
+            --accent: #e07422;
+            --accent-dark: #c45e10;
+            --accent-light: #fff4eb;
+            --border: #f0e0d0;
+            --card-bg: #ffffff;
+            --bookmark: #d63b2f;
+            --hero-bg: linear-gradient(160deg, #fffbf7 0%, #fff4eb 40%, #fde8d4 100%);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #1a0f08;
+                --text: #faf5f0;
+                --muted: #b8a090;
+                --accent: #e88a3a;
+                --accent-dark: #f09840;
+                --accent-light: #2a1a0e;
+                --border: #3a2a1e;
+                --card-bg: #241a10;
+                --bookmark: #e04a3e;
+                --hero-bg: linear-gradient(160deg, #1a0f08 0%, #2a1a0e 40%, #3a2210 100%);
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Nav */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 251, 247, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 100%;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .nav {
+                background: rgba(26, 15, 8, 0.85);
+            }
+        }
+
+        .nav-brand {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-brand img {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        @media (max-width: 480px) {
+            .nav-links { gap: 12px; }
+            .nav-links a { font-size: 13px; }
+        }
+
+        /* Container */
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 56px 0 40px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 48px;
+        }
+
+        .page-header h1 {
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 8px;
+        }
+
+        .page-header h1 .kanji {
+            color: var(--accent);
+        }
+
+        .page-header p {
+            font-size: 17px;
+            color: var(--muted);
+            max-width: 480px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: var(--accent-light);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px 28px;
+            margin-bottom: 48px;
+        }
+
+        .toc h2 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .toc ol {
+            list-style: none;
+            padding: 0;
+            columns: 2;
+            column-gap: 24px;
+        }
+
+        .toc ol li {
+            padding: 4px 0;
+        }
+
+        .toc ol li a {
+            font-size: 14px;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .toc ol li a:hover {
+            color: var(--accent-dark);
+        }
+
+        @media (max-width: 480px) {
+            .toc ol { columns: 1; }
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.01em;
+        }
+
+        .section p, .section li {
+            font-size: 15px;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .section ul li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section ul li:last-child {
+            border-bottom: none;
+        }
+
+        .section ul li strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .section p {
+            margin-bottom: 12px;
+        }
+
+        .section p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Guide-specific: Tip callouts */
+        .tip {
+            background: var(--accent-light);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 10px 10px 0;
+            padding: 14px 18px;
+            margin: 16px 0;
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .tip strong {
+            color: var(--accent-dark);
+        }
+
+        /* Guide-specific: Engine cards */
+        .engine-cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin: 16px 0;
+        }
+
+        .engine-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px 20px;
+            transition: border-color 0.2s;
+        }
+
+        .engine-card:hover {
+            border-color: var(--accent);
+        }
+
+        .engine-card h4 {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--text);
+        }
+
+        .engine-card p {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        /* Guide-specific: Tier table */
+        .tier-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 14px;
+        }
+
+        .tier-table th, .tier-table td {
+            text-align: left;
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tier-table th {
+            font-weight: 700;
+            color: var(--text);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .tier-table td {
+            color: var(--muted);
+        }
+
+        .tier-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Guide-specific: Mastery badges */
+        .mastery-levels {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 12px 0;
+        }
+
+        .mastery-badge {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            color: #fff;
+        }
+
+        .mastery-badge.mastered { background: #34a853; }
+        .mastery-badge.stable { background: #4285f4; }
+        .mastery-badge.improving { background: #f9ab00; color: #2d1a0e; }
+        .mastery-badge.unstable { background: #e07422; }
+        .mastery-badge.noticed { background: #9aa0a6; }
+
+        /* Back to top */
+        .back-to-top {
+            display: block;
+            text-align: center;
+            padding: 16px 0;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .back-to-top:hover {
+            color: var(--accent-dark);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 24px 0 48px;
+            border-top: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--muted);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nav -->
+    <nav class="nav">
+        <a href="index.html" class="nav-brand">
+            <img src="icon.png" alt="Kanshu"> Kanshu
+        </a>
+        <div class="nav-links">
+            <a href="index.html#features">Features</a>
+            <a href="guide.html" class="active">Guide</a>
+            <a href="index.html#faq">FAQ</a>
+            <a href="privacy.html">Privacy</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <!-- Page Header -->
+        <div class="page-header" id="top">
+            <h1><span class="kanji">使用指南</span> User Guide</h1>
+            <p>Everything you need to know to get the most out of Kanshu.</p>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h2>Contents</h2>
+            <ol>
+                <li><a href="#getting-started">Getting Started</a></li>
+                <li><a href="#importing-books">Importing Books</a></li>
+                <li><a href="#reading">Reading</a></li>
+                <li><a href="#pinyin-mode">Pinyin Mode</a></li>
+                <li><a href="#themes">Themes & Customization</a></li>
+                <li><a href="#word-lookup">Word Lookup</a></li>
+                <li><a href="#segmentation">Segmentation Engines</a></li>
+                <li><a href="#grammar-ai">Grammar & AI</a></li>
+                <li><a href="#reading-coach">Reading Coach</a></li>
+                <li><a href="#srs">Spaced Repetition (SRS)</a></li>
+                <li><a href="#toc-nav">Table of Contents & Navigation</a></li>
+                <li><a href="#pattern-radar">Pattern Radar (Insights)</a></li>
+                <li><a href="#tips">Tips & Tricks</a></li>
+            </ol>
+        </div>
+
+        <!-- 1. Getting Started -->
+        <div class="section" id="getting-started">
+            <h2 class="section-title">1. Getting Started</h2>
+            <ul>
+                <li><strong>Download from the App Store.</strong> Search for "Kanshu" or use the link on the homepage.</li>
+                <li><strong>First launch: pick your HSK level.</strong> You'll be asked to choose your level, from Beginner through HSK 6+. This calibrates the coach and word difficulty highlights.</li>
+                <li><strong>Don't worry about picking wrong.</strong> The coach adapts to your actual reading behavior over time. Your initial choice just sets a starting point.</li>
+                <li><strong>Your first book.</strong> Tap "Add Book" to import a file, paste text, or load the built-in sample text to start reading immediately.</li>
+            </ul>
+        </div>
+
+        <!-- 2. Importing Books -->
+        <div class="section" id="importing-books">
+            <h2 class="section-title">2. Importing Books</h2>
+            <ul>
+                <li><strong>EPUB files</strong> — The best format. Preserves chapter structure via TOC metadata, giving you proper chapter navigation and page breaks.</li>
+                <li><strong>Plain text (.txt)</strong> — Simple import. Chapters are detected automatically by pattern matching (e.g., 第一章, Chapter 1).</li>
+                <li><strong>PDF</strong> — Text is extracted via PDFKit. Works well for most Chinese PDFs, though scanned documents are not supported.</li>
+                <li><strong>Web URLs</strong> — Paste any Chinese article URL. The app supports GB18030 encoding, so it handles most Chinese websites correctly.</li>
+                <li><strong>Paste</strong> — Copy text from anywhere and paste it directly into Kanshu. Great for short articles or excerpts.</li>
+            </ul>
+            <div class="tip">
+                <strong>Tip:</strong> EPUB gives the best experience with proper chapter navigation. If you have a choice of format, always go with EPUB.
+            </div>
+        </div>
+
+        <!-- 3. Reading -->
+        <div class="section" id="reading">
+            <h2 class="section-title">3. Reading</h2>
+            <ul>
+                <li><strong>Page navigation.</strong> Swipe left or right, or tap the edges of the screen. The page curl animation follows the Apple Books style.</li>
+                <li><strong>Tap any word</strong> for an instant lookup — pinyin, definition, HSK level, and frequency data appear in a popover.</li>
+                <li><strong>Page indicator</strong> at the bottom shows your current position and overall progress through the book.</li>
+                <li><strong>Bookmarks.</strong> Tap the bookmark icon to save your current page. Access all bookmarks from the bottom menu.</li>
+                <li><strong>Highlights.</strong> Long-press to enter selection mode, then drag to highlight text. Choose from 4 highlight colors.</li>
+                <li><strong>Full-text search.</strong> Open the bottom menu and tap the search icon to find any word or phrase across the entire book.</li>
+            </ul>
+        </div>
+
+        <!-- 4. Pinyin Mode -->
+        <div class="section" id="pinyin-mode">
+            <h2 class="section-title">4. Pinyin Mode</h2>
+            <p>Toggle "Show Pinyin" in the reader settings panel (tap the gear icon). When enabled, pinyin annotations appear above every word with tone coloring:</p>
+            <ul>
+                <li><strong>Tone 1 (high)</strong> — red</li>
+                <li><strong>Tone 2 (rising)</strong> — orange</li>
+                <li><strong>Tone 3 (dip)</strong> — green</li>
+                <li><strong>Tone 4 (falling)</strong> — blue</li>
+                <li><strong>Neutral tone</strong> — gray</li>
+            </ul>
+            <p>This mode is especially useful for beginners or when encountering unfamiliar texts. The reader automatically adjusts the layout to accommodate the extra height needed for pinyin.</p>
+        </div>
+
+        <!-- 5. Themes & Customization -->
+        <div class="section" id="themes">
+            <h2 class="section-title">5. Themes & Customization</h2>
+            <p>Open the reader settings panel (gear icon) to customize your reading experience.</p>
+            <ul>
+                <li><strong>Themes:</strong> Sepia (warm, default), Light (clean white), Dark (night reading).</li>
+                <li><strong>Font:</strong> Songti (serif, traditional feel), PingFang (modern sans-serif), Kaiti (calligraphic).</li>
+                <li><strong>Font size:</strong> Adjustable from 16pt to 32pt.</li>
+                <li><strong>Line spacing:</strong> 1.0x to 2.0x for comfortable reading.</li>
+                <li><strong>Margins:</strong> Small, Medium, or Large.</li>
+                <li><strong>Highlight coloring:</strong> None, HSK Level (color words by difficulty), or Saved Words (highlight words you've saved).</li>
+            </ul>
+        </div>
+
+        <!-- 6. Word Lookup -->
+        <div class="section" id="word-lookup">
+            <h2 class="section-title">6. Word Lookup</h2>
+            <p>Tap any word in the reader to open the word popover. It shows:</p>
+            <ul>
+                <li><strong>Chinese characters, pinyin, and English definition.</strong> Pinyin is tone-colored for easy reading.</li>
+                <li><strong>Tags:</strong> HSK level (1-6), part of speech, book frequency, and how many times you've encountered this word.</li>
+                <li><strong>"Grammar & examples" button</strong> — generates context-aware grammar notes with example sentences.</li>
+                <li><strong>"Ask AI" button</strong> — uses Apple Intelligence (iOS 26+) for deeper explanations including part-of-speech analysis, usage examples, and full sentence breakdown.</li>
+                <li><strong>"Sentence" button</strong> — translates the full sentence using Apple Translation or cloud AI.</li>
+                <li><strong>"+" button</strong> — saves the word to your word list for spaced repetition review.</li>
+            </ul>
+        </div>
+
+        <!-- 7. Segmentation Engines -->
+        <div class="section" id="segmentation">
+            <h2 class="section-title">7. Segmentation Engines</h2>
+            <p>Kanshu offers three different engines for splitting Chinese text into individual words. Each has different strengths.</p>
+            <div class="engine-cards">
+                <div class="engine-card">
+                    <h4>CC-CEDICT (Dictionary-based)</h4>
+                    <p>Uses a 120,000+ entry Chinese-English dictionary with a bidirectional maximum matching algorithm. The most reliable option for common vocabulary. Includes pinyin, definitions, and HSK levels for every word it recognizes.</p>
+                </div>
+                <div class="engine-card">
+                    <h4>Apple NL (Default)</h4>
+                    <p>Uses Apple's built-in NLTokenizer for word segmentation. No extra dictionary files needed. Good accuracy backed by Apple's NLP models. Falls back to the CEDICT dictionary for definitions and pinyin lookup.</p>
+                </div>
+                <div class="engine-card">
+                    <h4>Jieba (Experimental)</h4>
+                    <p>Statistical segmentation using Hidden Markov Models via the cppjieba C++ library. Approximately 97% accuracy. Requires bundling additional dictionary files. Best for handling new words and slang not in the standard dictionary.</p>
+                </div>
+            </div>
+            <p>To switch engines, go to Settings (gear icon in the library) and select your preferred Segmentation Engine. All engines produce tappable word tokens for definitions.</p>
+        </div>
+
+        <!-- 8. Grammar & AI -->
+        <div class="section" id="grammar-ai">
+            <h2 class="section-title">8. Grammar & AI</h2>
+            <p>Kanshu uses a three-tier system for grammar explanations, with automatic fallback between tiers:</p>
+            <table class="tier-table">
+                <thead>
+                    <tr>
+                        <th>Tier</th>
+                        <th>How It Works</th>
+                        <th>Requirements</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Bundled</strong></td>
+                        <td>Pre-generated grammar notes for 20,000+ patterns. Instant results, fully offline.</td>
+                        <td>None (always available)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>On-device AI</strong></td>
+                        <td>Apple Intelligence generates context-aware grammar explanations in 1-2 seconds. No data leaves your device.</td>
+                        <td>iOS 26+ and supported hardware</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cloud AI</strong></td>
+                        <td>Rich, contextual explanations in 1-3 seconds. Supports Anthropic Claude, OpenAI, Google Gemini, or any OpenAI-compatible endpoint.</td>
+                        <td>API key required</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>The app tries each tier in order: Bundled, then On-device, then Cloud. If one tier is unavailable, it automatically falls back to the next.</p>
+            <p>To set up Cloud AI, go to Settings, then Cloud AI, and enter your API key and select your provider.</p>
+        </div>
+
+        <!-- 9. Reading Coach -->
+        <div class="section" id="reading-coach">
+            <h2 class="section-title">9. Reading Coach</h2>
+            <p>The reading coach is an adaptive system that learns from your reading behavior and generates targeted exercises.</p>
+            <ul>
+                <li><strong>Silent observation.</strong> The coach watches silently for the first 8 pages, tracking which words you tap, which grammar you look up, which sentences you translate, and how long you spend on each page.</li>
+                <li><strong>Targeted challenges.</strong> When it detects you're struggling with a grammar pattern, it generates mini-challenges. Types include: multiple choice, tone quiz, grammar role identification, sentence reordering, and vocabulary recall.</li>
+                <li><strong>Pattern mastery</strong> progresses through levels: Noticed, Improving, Stable, and finally Mastered.</li>
+                <li><strong>View your progress</strong> in Pattern Radar (tap the insights button in the library).</li>
+                <li><strong>Non-intrusive.</strong> The coach never interrupts more than 3 times per reading session, so it won't break your flow.</li>
+            </ul>
+        </div>
+
+        <!-- 10. Spaced Repetition (SRS) -->
+        <div class="section" id="srs">
+            <h2 class="section-title">10. Spaced Repetition (SRS)</h2>
+            <ul>
+                <li><strong>Save any word</strong> by tapping the "+" button in the word popover.</li>
+                <li><strong>Review cards</strong> via the flashcard icon in the library view.</li>
+                <li><strong>SM-2 algorithm.</strong> Cards are scheduled based on how well you remembered them. The spacing increases as you get better at a word.</li>
+                <li><strong>Rating scale:</strong> Again (forgot), Hard, Good, Easy. Rate honestly for the best results.</li>
+                <li><strong>Daily review.</strong> Cards resurface on their due date. A few minutes of daily review keeps words in long-term memory.</li>
+                <li><strong>Export to Pleco.</strong> Export your word list in Pleco format for use with other Chinese learning apps.</li>
+            </ul>
+        </div>
+
+        <!-- 11. Table of Contents & Navigation -->
+        <div class="section" id="toc-nav">
+            <h2 class="section-title">11. Table of Contents & Navigation</h2>
+            <ul>
+                <li><strong>EPUBs:</strong> Chapters are extracted from the book's built-in TOC metadata for accurate navigation.</li>
+                <li><strong>Text files:</strong> Chapters are detected via pattern matching (第一章, Chapter 1, etc.).</li>
+                <li><strong>Access:</strong> Open the bottom menu and tap Contents to see all chapters, bookmarks, and highlights with page numbers.</li>
+                <li><strong>Page breaks.</strong> Chapters start on fresh pages, so you always get a clean break between sections.</li>
+            </ul>
+        </div>
+
+        <!-- 12. Pattern Radar (Insights) -->
+        <div class="section" id="pattern-radar">
+            <h2 class="section-title">12. Pattern Radar (Insights)</h2>
+            <p>Pattern Radar shows all grammar patterns you've encountered, grouped by mastery level:</p>
+            <div class="mastery-levels">
+                <span class="mastery-badge mastered">Mastered</span>
+                <span class="mastery-badge stable">Stable</span>
+                <span class="mastery-badge improving">Improving</span>
+                <span class="mastery-badge unstable">Unstable</span>
+                <span class="mastery-badge noticed">Noticed</span>
+            </div>
+            <ul>
+                <li><strong>Each pattern shows:</strong> name, confidence percentage, tier (A/B/C), and trend direction.</li>
+                <li><strong>"Analyze deeper"</strong> uses AI to generate a summary of your strengths and weak areas across all patterns.</li>
+                <li><strong>Focus Areas</strong> at the top of the screen highlight patterns that need the most attention.</li>
+            </ul>
+        </div>
+
+        <!-- 13. Tips & Tricks -->
+        <div class="section" id="tips">
+            <h2 class="section-title">13. Tips & Tricks</h2>
+            <ul>
+                <li><strong>Enter selection mode.</strong> Long-press a word to start highlighting text.</li>
+                <li><strong>Dismiss the word popover.</strong> Swipe down on it or tap outside.</li>
+                <li><strong>Give the coach time.</strong> It works best after reading 20+ pages, since it needs data to learn your patterns.</li>
+                <li><strong>Use EPUB format</strong> for the best reading experience with proper chapter structure.</li>
+                <li><strong>Export word lists to Pleco</strong> for flashcard study on the go with other apps.</li>
+                <li><strong>Fully offline.</strong> The app works completely offline. Cloud AI and Apple Intelligence are optional enhancements that add depth but are not required.</li>
+            </ul>
+        </div>
+
+        <a href="#top" class="back-to-top">Back to top</a>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2026 Priyesh. All rights reserved.</p>
+        </footer>
+
+    </div>
+</body>
+</html>
