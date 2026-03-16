@@ -401,6 +401,7 @@
                 <li><a href="#toc-nav">Table of Contents & Navigation</a></li>
                 <li><a href="#pattern-radar">Pattern Radar (Insights)</a></li>
                 <li><a href="#tips">Tips & Tricks</a></li>
+                <li><a href="#gestures">Keyboard Shortcuts & Gestures</a></li>
             </ol>
         </div>
 
@@ -409,10 +410,13 @@
             <h2 class="section-title">1. Getting Started</h2>
             <ul>
                 <li><strong>Download from the App Store.</strong> Search for "Kanshu" or use the link on the homepage.</li>
-                <li><strong>First launch: pick your HSK level.</strong> You'll be asked to choose your level, from Beginner through HSK 6+. This calibrates the coach and word difficulty highlights.</li>
-                <li><strong>Don't worry about picking wrong.</strong> The coach adapts to your actual reading behavior over time. Your initial choice just sets a starting point.</li>
-                <li><strong>Your first book.</strong> Tap "Add Book" to import a file, paste text, or load the built-in sample text to start reading immediately.</li>
+                <li><strong>First launch: pick your HSK level.</strong> You'll be asked to choose your level, from Beginner through HSK 6+. This calibrates the coach and word difficulty highlights. Behind the scenes, your selection seeds the initial confidence values for the coach's grammar pattern registry, so it starts with reasonable assumptions about what you already know.</li>
+                <li><strong>Don't worry about picking wrong.</strong> The coach recalibrates based on your actual reading behavior within a few sessions. Your initial choice just gives it a head start so early challenges are relevant rather than random.</li>
+                <li><strong>Your first book.</strong> Tap "Add Book" to import a file, paste text, or try the built-in sample book "测试故事集" (Test Story Collection). This sample text comes pre-loaded and is a great way to explore all the features — tap-to-learn, grammar coaching, pinyin mode — before importing your own reading material.</li>
             </ul>
+            <div class="tip">
+                <strong>Tip:</strong> Spend a few minutes with 测试故事集 to get a feel for how the coach works. Read at least 8 pages so the coach has enough data to start generating targeted challenges for you.
+            </div>
         </div>
 
         <!-- 2. Importing Books -->
@@ -434,13 +438,18 @@
         <div class="section" id="reading">
             <h2 class="section-title">3. Reading</h2>
             <ul>
-                <li><strong>Page navigation.</strong> Swipe left or right, or tap the edges of the screen. The page curl animation follows the Apple Books style.</li>
-                <li><strong>Tap any word</strong> for an instant lookup — pinyin, definition, HSK level, and frequency data appear in a popover.</li>
+                <li><strong>Page navigation.</strong> Swipe left or right, or tap the edges of the screen. The page curl animation is built on UIPageViewController, giving you the same natural feel as Apple Books.</li>
+                <li><strong>Tap any word</strong> for an instant lookup — tone-colored pinyin, English definition, HSK level, and frequency data appear in a popover. No scrolling through dictionaries; everything is one tap away.</li>
+                <li><strong>Reading position is saved as a character offset</strong>, not a page number. This means your position survives perfectly even when you change font size, font family, line spacing, or any other display setting. You'll always pick up exactly where you left off.</li>
+                <li><strong>Continue Reading card.</strong> When you return to the library, you'll see a "Continue Reading" card for your most recent book that takes you right back to where you stopped. No hunting through your library.</li>
                 <li><strong>Page indicator</strong> at the bottom shows your current position and overall progress through the book.</li>
                 <li><strong>Bookmarks.</strong> Tap the bookmark icon to save your current page. Access all bookmarks from the bottom menu.</li>
                 <li><strong>Highlights.</strong> Long-press to enter selection mode, then drag to highlight text. Choose from 4 highlight colors.</li>
                 <li><strong>Full-text search.</strong> Open the bottom menu and tap the search icon to find any word or phrase across the entire book.</li>
             </ul>
+            <div class="tip">
+                <strong>Tip:</strong> If you change your font size or theme mid-book, don't worry about losing your place. Because position is stored as a character offset, Kanshu will re-paginate and land you on exactly the right page.
+            </div>
         </div>
 
         <!-- 4. Pinyin Mode -->
@@ -474,15 +483,18 @@
         <!-- 6. Word Lookup -->
         <div class="section" id="word-lookup">
             <h2 class="section-title">6. Word Lookup</h2>
-            <p>Tap any word in the reader to open the word popover. It shows:</p>
+            <p>Tap any word in the reader to open the word popover. This is your primary learning tool — everything you need to understand a word is right here.</p>
             <ul>
-                <li><strong>Chinese characters, pinyin, and English definition.</strong> Pinyin is tone-colored for easy reading.</li>
-                <li><strong>Tags:</strong> HSK level (1-6), part of speech, book frequency, and how many times you've encountered this word.</li>
-                <li><strong>"Grammar & examples" button</strong> — generates context-aware grammar notes with example sentences.</li>
-                <li><strong>"Ask AI" button</strong> — uses Apple Intelligence (iOS 26+) for deeper explanations including part-of-speech analysis, usage examples, and full sentence breakdown.</li>
-                <li><strong>"Sentence" button</strong> — translates the full sentence using Apple Translation or cloud AI.</li>
-                <li><strong>"+" button</strong> — saves the word to your word list for spaced repetition review.</li>
+                <li><strong>Chinese characters, pinyin, and English definition.</strong> Pinyin is tone-colored (red = T1, orange = T2, green = T3, blue = T4, gray = neutral) so you can see the tones at a glance.</li>
+                <li><strong>Tags:</strong> HSK level (1-6), part of speech (noun, verb, adjective, etc.), frequency rank within the current book, and how many times you've encountered this word across all your reading.</li>
+                <li><strong>"Grammar & examples" button</strong> — generates context-aware grammar notes with example sentences. The source is shown as a label: "onDevice" for Apple Intelligence, the cloud provider name for cloud AI, or "bundled" for the pre-generated notes. This way you always know where the explanation came from.</li>
+                <li><strong>"Ask AI" button</strong> — provides a deep-dive explanation: detailed part-of-speech analysis (is it being used as a noun, verb, or adjective in this context?), practical use-cases with English translations, and example sentences drawn from real Chinese usage. Think of it as having a Chinese tutor explain the word to you in context.</li>
+                <li><strong>"Sentence" button</strong> — translates the full sentence using Apple Translation or cloud AI. Useful when you understand individual words but the overall meaning isn't clicking.</li>
+                <li><strong>"+" button</strong> — saves the word to your word list for spaced repetition review. One tap to save, and it enters the SM-2 review queue automatically.</li>
             </ul>
+            <div class="tip">
+                <strong>Tip:</strong> Don't just tap words you don't know. Tapping words you partially know and reading the grammar notes is one of the fastest ways to deepen your understanding of how Chinese words function in different contexts.
+            </div>
         </div>
 
         <!-- 7. Segmentation Engines -->
@@ -492,18 +504,21 @@
             <div class="engine-cards">
                 <div class="engine-card">
                     <h4>CC-CEDICT (Dictionary-based)</h4>
-                    <p>Uses a 120,000+ entry Chinese-English dictionary with a bidirectional maximum matching algorithm. The most reliable option for common vocabulary. Includes pinyin, definitions, and HSK levels for every word it recognizes.</p>
+                    <p>Uses a 120,000+ entry Chinese-English dictionary with a bidirectional maximum matching algorithm. The most reliable option for common vocabulary. Includes pinyin, definitions, and HSK levels for every word it recognizes. <strong>Best if you want the most complete dictionary info for every word</strong> — every token it produces comes with a full definition, pinyin, and HSK level already attached.</p>
                 </div>
                 <div class="engine-card">
                     <h4>Apple NL (Default)</h4>
-                    <p>Uses Apple's built-in NLTokenizer for word segmentation. No extra dictionary files needed. Good accuracy backed by Apple's NLP models. Falls back to the CEDICT dictionary for definitions and pinyin lookup.</p>
+                    <p>Uses Apple's built-in NLTokenizer for word segmentation. No extra dictionary files needed. Good accuracy backed by Apple's NLP models. Falls back to the CEDICT dictionary for definitions and pinyin lookup. <strong>Best for natural word boundaries that match how native speakers actually read.</strong> Apple's models understand compound words and context in ways a dictionary-only approach can't.</p>
                 </div>
                 <div class="engine-card">
                     <h4>Jieba (Experimental)</h4>
-                    <p>Statistical segmentation using Hidden Markov Models via the cppjieba C++ library. Approximately 97% accuracy. Requires bundling additional dictionary files. Best for handling new words and slang not in the standard dictionary.</p>
+                    <p>Statistical segmentation using Hidden Markov Models via the cppjieba C++ library. Approximately 97% accuracy. Requires bundling additional dictionary files. <strong>Best for texts with lots of slang, internet language, or neologisms</strong> — Jieba's statistical approach handles words that aren't in the standard dictionary, making it a great fit for social media posts, web novels, and contemporary fiction.</p>
                 </div>
             </div>
-            <p>To switch engines, go to Settings (gear icon in the library) and select your preferred Segmentation Engine. All engines produce tappable word tokens for definitions.</p>
+            <p>To switch engines, go to Settings (gear icon in the library) and select your preferred Segmentation Engine. All engines produce tappable word tokens with definitions. You can switch engines at any time, even mid-book — Kanshu will re-segment the text on the next page load.</p>
+            <div class="tip">
+                <strong>Tip:</strong> Not sure which engine to pick? Start with Apple NL (the default). If you find that words are being split too aggressively, try CC-CEDICT. If you're reading casual web content and some slang isn't being recognized, try Jieba.
+            </div>
         </div>
 
         <!-- 8. Grammar & AI -->
@@ -537,33 +552,60 @@
                 </tbody>
             </table>
             <p>The app tries each tier in order: Bundled, then On-device, then Cloud. If one tier is unavailable, it automatically falls back to the next.</p>
-            <p>To set up Cloud AI, go to Settings, then Cloud AI, and enter your API key and select your provider.</p>
+            <p><strong>Cloud AI providers and models:</strong></p>
+            <ul>
+                <li><strong>Anthropic Claude</strong> — uses claude-haiku-4-5-20251001 (fast, high-quality grammar explanations)</li>
+                <li><strong>OpenAI</strong> — uses gpt-4o-mini (cost-effective, good Chinese language understanding)</li>
+                <li><strong>Google Gemini</strong> — uses gemini-2.0-flash-lite (fastest responses, lowest cost)</li>
+                <li><strong>Custom endpoint</strong> — any OpenAI-compatible API. Point this at a self-hosted model (e.g., running on Ollama or LM Studio) if you want full privacy with cloud-quality explanations.</li>
+            </ul>
+            <p>To set up Cloud AI, go to Settings, then Cloud AI, and enter your API key and select your provider. You can also customize the AI prompt in settings to adjust the style and depth of grammar explanations — for example, you might want more formal linguistic terminology, or simpler explanations in plain English.</p>
+            <div class="tip">
+                <strong>Tip:</strong> If you have access to multiple providers, Gemini flash-lite gives the fastest responses for quick lookups, while Claude haiku tends to produce the most detailed grammar breakdowns. Experiment to find your preference.
+            </div>
         </div>
 
         <!-- 9. Reading Coach -->
         <div class="section" id="reading-coach">
             <h2 class="section-title">9. Reading Coach</h2>
-            <p>The reading coach is an adaptive system that learns from your reading behavior and generates targeted exercises.</p>
+            <p>The reading coach is the heart of Kanshu's learning system. It's an adaptive engine that learns from your reading behavior and generates targeted exercises to strengthen your weak spots — without you having to do anything except read.</p>
             <ul>
-                <li><strong>Silent observation.</strong> The coach watches silently for the first 8 pages, tracking which words you tap, which grammar you look up, which sentences you translate, and how long you spend on each page.</li>
-                <li><strong>Targeted challenges.</strong> When it detects you're struggling with a grammar pattern, it generates mini-challenges. Types include: multiple choice, tone quiz, grammar role identification, sentence reordering, and vocabulary recall.</li>
+                <li><strong>Silent observation.</strong> The coach watches silently for the first 8 pages, tracking which words you tap, which grammar you look up, which sentences you translate, and how long you spend on each page. All of this feeds into per-pattern confidence scores.</li>
+                <li><strong>100+ grammar patterns in the registry.</strong> Patterns are organized into three tiers:
+                    <br><strong>Tier A (Foundational):</strong> 把 constructions, 被 passive, 了/着/过 aspect markers, basic complements — the building blocks you need for everything else.
+                    <br><strong>Tier B (Intermediate):</strong> Result complements (V得/V不), topic-comment structures, comparative patterns (比/没有), directional complements — the patterns that make you sound natural.
+                    <br><strong>Tier C (Advanced):</strong> 是...的 focus frames, 连...都/也 emphasis, rhetorical constructions, literary patterns — the structures that separate fluent readers from intermediate ones.</li>
+                <li><strong>Bayesian confidence scoring.</strong> Each pattern has a confidence score that updates based on your interactions. The scoring includes recency decay, so patterns you haven't encountered recently will gradually drift back toward "needs review" — the coach won't assume you've permanently mastered something just because you got it right once.</li>
+                <li><strong>Targeted challenges.</strong> When it detects you're struggling with a grammar pattern, it generates mini-challenges. Six types: multiple choice, tone quiz, grammar role identification, sentence reordering, fill-in-the-blank, and vocabulary recall. Challenges use sentences from your actual reading material, not generic textbook examples.</li>
                 <li><strong>Pattern mastery</strong> progresses through levels: Noticed, Improving, Stable, and finally Mastered.</li>
+                <li><strong>Flag incorrect detections.</strong> If the coach identifies a grammar pattern that doesn't actually apply to the sentence, tap the "Wrong pattern?" button to flag it. Your feedback improves the detection system and prevents the same false positive from recurring.</li>
                 <li><strong>View your progress</strong> in Pattern Radar (tap the insights button in the library).</li>
-                <li><strong>Non-intrusive.</strong> The coach never interrupts more than 3 times per reading session, so it won't break your flow.</li>
+                <li><strong>Non-intrusive.</strong> The coach never interrupts more than 3 times per reading session, so it won't break your flow. You're reading first, learning second.</li>
             </ul>
+            <div class="tip">
+                <strong>Tip:</strong> The coach gets dramatically better after 20+ pages because it has more data to distinguish genuine weak spots from one-off lookups. Give it time, and the challenges will feel eerily well-targeted.
+            </div>
         </div>
 
         <!-- 10. Spaced Repetition (SRS) -->
         <div class="section" id="srs">
             <h2 class="section-title">10. Spaced Repetition (SRS)</h2>
             <ul>
-                <li><strong>Save any word</strong> by tapping the "+" button in the word popover.</li>
-                <li><strong>Review cards</strong> via the flashcard icon in the library view.</li>
-                <li><strong>SM-2 algorithm.</strong> Cards are scheduled based on how well you remembered them. The spacing increases as you get better at a word.</li>
-                <li><strong>Rating scale:</strong> Again (forgot), Hard, Good, Easy. Rate honestly for the best results.</li>
-                <li><strong>Daily review.</strong> Cards resurface on their due date. A few minutes of daily review keeps words in long-term memory.</li>
-                <li><strong>Export to Pleco.</strong> Export your word list in Pleco format for use with other Chinese learning apps.</li>
+                <li><strong>Save any word</strong> by tapping the "+" button in the word popover. It immediately enters the review queue.</li>
+                <li><strong>Review cards</strong> via the flashcard icon in the library view. You'll see a "Due for Review" badge in the library showing how many cards are waiting — for example, "4 Due for Review" means four words are ready for you today.</li>
+                <li><strong>SM-2 algorithm.</strong> Cards are scheduled based on how well you remembered them. The spacing increases exponentially as you get better at a word — from 1 day to 3 days to a week to a month and beyond.</li>
+                <li><strong>Rating mechanics — what each button actually does:</strong>
+                    <br><strong>Again:</strong> You forgot the word. Resets the interval to 1 day and drops the ease factor. You'll see this word again tomorrow.
+                    <br><strong>Hard:</strong> You remembered, but it was a struggle. Reduces the ease factor slightly, keeping the interval shorter than normal. Good for words you can recognize but can't confidently produce.
+                    <br><strong>Good:</strong> You remembered it correctly. This is the expected path — the interval grows at the standard rate based on your ease factor.
+                    <br><strong>Easy:</strong> You knew it instantly. Boosts the interval significantly and increases the ease factor. Use this for words that feel automatic.</li>
+                <li><strong>Rate honestly.</strong> The whole system depends on honest ratings. Hitting "Easy" on everything will push words out too far and you'll forget them. Hitting "Again" too often will keep you reviewing the same words endlessly. Trust the algorithm and rate how you actually felt.</li>
+                <li><strong>Daily review.</strong> Cards resurface on their due date. A consistent 5-10 minutes of daily review is far more effective than hour-long weekly sessions for moving words into long-term memory.</li>
+                <li><strong>Export to Pleco.</strong> Export your word list in Pleco format for use with other Chinese learning apps. Access this from the word list view in the library.</li>
             </ul>
+            <div class="tip">
+                <strong>Tip:</strong> The best time to review is right before you start a new reading session. Reviewing first primes your memory for the words you're about to encounter again in context.
+            </div>
         </div>
 
         <!-- 11. Table of Contents & Navigation -->
@@ -580,7 +622,8 @@
         <!-- 12. Pattern Radar (Insights) -->
         <div class="section" id="pattern-radar">
             <h2 class="section-title">12. Pattern Radar (Insights)</h2>
-            <p>Pattern Radar shows all grammar patterns you've encountered, grouped by mastery level:</p>
+            <p>Pattern Radar is your dashboard for understanding which grammar patterns you've internalized and which ones still need work. Every pattern you encounter while reading is tracked here.</p>
+            <p><strong>Mastery levels</strong> show how confident the system is that you understand each pattern:</p>
             <div class="mastery-levels">
                 <span class="mastery-badge mastered">Mastered</span>
                 <span class="mastery-badge stable">Stable</span>
@@ -588,24 +631,52 @@
                 <span class="mastery-badge unstable">Unstable</span>
                 <span class="mastery-badge noticed">Noticed</span>
             </div>
+            <p><strong>Patterns are organized into tiers</strong> that correspond to difficulty level:</p>
             <ul>
-                <li><strong>Each pattern shows:</strong> name, confidence percentage, tier (A/B/C), and trend direction.</li>
-                <li><strong>"Analyze deeper"</strong> uses AI to generate a summary of your strengths and weak areas across all patterns.</li>
-                <li><strong>Focus Areas</strong> at the top of the screen highlight patterns that need the most attention.</li>
+                <li><strong>Tier A (Foundational)</strong> — Core grammar like 把, 被, aspect markers (了/着/过). These correlate roughly with HSK 1-3. If your Tier A patterns aren't "Stable" or "Mastered," the coach will prioritize them because everything else builds on these.</li>
+                <li><strong>Tier B (Intermediate)</strong> — Result complements, topic-comment structures, comparative patterns. Roughly HSK 3-5. These are the patterns that make your reading fluent rather than halting.</li>
+                <li><strong>Tier C (Advanced)</strong> — 是...的 focus frames, 连...都/也 emphasis constructions, literary and rhetorical patterns. HSK 5-6+. Mastering these means you can read native-level texts without constantly pausing.</li>
             </ul>
+            <p><strong>Each pattern card shows:</strong> the pattern name (in Chinese and English), your current confidence percentage, the tier (A/B/C), an HSK level correlation, and a trend arrow showing whether your confidence is rising, stable, or declining.</p>
+            <ul>
+                <li><strong>Focus Areas</strong> appear at the top of the screen and highlight patterns where your confidence is below threshold but you keep encountering them in your reading. These are your highest-leverage study targets — patterns that are both common in what you read and not yet solid in your memory.</li>
+                <li><strong>"Analyze deeper"</strong> uses AI to generate a narrative summary of your strengths and weak areas across all patterns, with specific recommendations for what to focus on next.</li>
+            </ul>
+            <div class="tip">
+                <strong>Tip:</strong> Check Pattern Radar after finishing a book. It gives you a clear picture of what that particular text taught you and helps you choose your next book — pick something that will challenge your Tier B/C weak spots.
+            </div>
         </div>
 
         <!-- 13. Tips & Tricks -->
         <div class="section" id="tips">
             <h2 class="section-title">13. Tips & Tricks</h2>
             <ul>
-                <li><strong>Enter selection mode.</strong> Long-press a word to start highlighting text.</li>
-                <li><strong>Dismiss the word popover.</strong> Swipe down on it or tap outside.</li>
-                <li><strong>Give the coach time.</strong> It works best after reading 20+ pages, since it needs data to learn your patterns.</li>
-                <li><strong>Use EPUB format</strong> for the best reading experience with proper chapter structure.</li>
-                <li><strong>Export word lists to Pleco</strong> for flashcard study on the go with other apps.</li>
-                <li><strong>Fully offline.</strong> The app works completely offline. Cloud AI and Apple Intelligence are optional enhancements that add depth but are not required.</li>
+                <li><strong>Don't look up every word.</strong> If you can infer meaning from context, keep reading. The coach tracks which words you tap, and if you look up everything, it can't distinguish genuine weak spots from curiosity. Save taps for words that are actually blocking your comprehension.</li>
+                <li><strong>Give the coach time.</strong> After 20+ pages, the coach has enough signal to generate really targeted challenges. The first few challenges might feel generic — they get dramatically better as it learns your patterns.</li>
+                <li><strong>Use EPUB format when possible.</strong> EPUBs preserve chapter structure, which gives you proper table of contents navigation and clean chapter breaks. If you have a choice of format, always go with EPUB.</li>
+                <li><strong>Review before you read.</strong> Doing your SRS review right before starting a new reading session primes your memory for words you're about to encounter in context. This makes both the review and the reading more effective.</li>
+                <li><strong>Check Pattern Radar between books.</strong> It'll show you what grammar the last book strengthened and help you pick your next book to target your weak areas.</li>
+                <li><strong>Export word lists to Pleco</strong> if you want to study on the go with other apps or share lists with classmates.</li>
+                <li><strong>Flag bad pattern detections.</strong> If the coach identifies a grammar pattern that doesn't match the sentence, tap "Wrong pattern?" to improve future detection. Your corrections make the system smarter.</li>
+                <li><strong>Everything works offline.</strong> The 120k dictionary, 20k grammar notes, segmentation engines, and the entire reading experience work without internet. Cloud AI and Apple Intelligence add richness but are never required.</li>
             </ul>
+        </div>
+
+        <!-- 14. Keyboard Shortcuts & Gestures -->
+        <div class="section" id="gestures">
+            <h2 class="section-title">14. Keyboard Shortcuts & Gestures</h2>
+            <p>Kanshu is designed around touch gestures to keep your reading flow uninterrupted. Here's the complete gesture reference:</p>
+            <ul>
+                <li><strong>Swipe left / right</strong> — Turn pages forward and backward. The page curl animation matches the direction of your swipe.</li>
+                <li><strong>Tap left / right edge</strong> — Alternative page turn. Tap the left ~20% of the screen to go back, right ~20% to go forward. Great for one-handed reading.</li>
+                <li><strong>Tap a word</strong> — Opens the word popover with pinyin, definition, HSK level, and action buttons. This is your primary interaction while reading.</li>
+                <li><strong>Long-press a word</strong> — Enters selection mode. Drag the selection handles to highlight a phrase or sentence. Choose from 4 highlight colors in the menu that appears.</li>
+                <li><strong>Swipe down on popover</strong> — Dismisses the word popover. You can also tap anywhere outside the popover to close it.</li>
+                <li><strong>Tap center of screen</strong> — Shows or hides the navigation bar and bottom menu.</li>
+            </ul>
+            <div class="tip">
+                <strong>Tip:</strong> Build a rhythm: swipe to turn pages, tap words you don't know, swipe down to dismiss the popover, keep reading. Once this becomes muscle memory, you'll read much faster because you're never hunting for buttons.
+            </div>
         </div>
 
         <a href="#top" class="back-to-top">Back to top</a>

@@ -247,6 +247,78 @@
             }
         }
 
+        /* How It Works */
+        .how-it-works {
+            padding: 0 0 56px;
+        }
+
+        .how-it-works h2 {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .how-it-works .subtitle {
+            font-size: 16px;
+            color: var(--muted);
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            position: relative;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .step h3 {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .step p {
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        @media (max-width: 640px) {
+            .steps {
+                grid-template-columns: 1fr 1fr;
+                gap: 24px 16px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .steps {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
         /* Screenshot Gallery */
         .gallery-section {
             padding: 0 0 64px;
@@ -471,32 +543,60 @@
             <div class="feature">
                 <div class="feature-icon">📖</div>
                 <div class="feature-title">Tap to Learn</div>
-                <div class="feature-desc">Tap any word for pinyin, definitions, HSK level, and grammar notes.</div>
+                <div class="feature-desc">Tap any word to instantly see tone-colored pinyin, English definitions from a 120,000-word CC-CEDICT dictionary, HSK 1-6 level tags, and part-of-speech labels. Every lookup is one tap away.</div>
             </div>
             <div class="feature">
                 <div class="feature-icon">🧠</div>
                 <div class="feature-title">Adaptive Coach</div>
-                <div class="feature-desc">AI-powered reading coach that generates exercises based on your struggles.</div>
+                <div class="feature-desc">Tracks every sentence you interact with and detects 100+ grammar patterns from foundational (把, 被, 了) to advanced (是...的 frames). Generates 6 types of targeted challenges: multiple choice, tone quizzes, grammar role ID, sentence reordering, fill-in-the-blank, and vocabulary recall.</div>
             </div>
             <div class="feature">
                 <div class="feature-icon">📚</div>
                 <div class="feature-title">Import Anything</div>
-                <div class="feature-desc">Read EPUB, PDF, plain text, or import directly from web URLs.</div>
+                <div class="feature-desc">Load EPUB files with full chapter structure preserved, PDFs via text extraction, plain text with auto-detected chapter headings, or paste any web URL. Built-in GB18030 encoding detection handles Chinese websites that other apps can't.</div>
             </div>
             <div class="feature">
                 <div class="feature-icon">🔁</div>
                 <div class="feature-title">Spaced Repetition</div>
-                <div class="feature-desc">SM-2 flashcards that surface saved words right when you need to review them.</div>
+                <div class="feature-desc">Save words with one tap and review them with SM-2 algorithm flashcards that adapt to your memory. Rate cards as Again, Hard, Good, or Easy, and the schedule optimizes itself. Export your word list to Pleco format for cross-app study.</div>
             </div>
             <div class="feature">
                 <div class="feature-icon">🔒</div>
                 <div class="feature-title">Works Offline</div>
-                <div class="feature-desc">120k-entry dictionary and grammar notes bundled — no internet required.</div>
+                <div class="feature-desc">Everything you need is on your device: a 120,000-entry dictionary, 20,000+ pre-generated grammar notes, and on-device Apple Intelligence for contextual explanations. Cloud AI is a powerful add-on, never a requirement.</div>
             </div>
             <div class="feature">
                 <div class="feature-icon">🗣️</div>
                 <div class="feature-title">Listen & Speak</div>
-                <div class="feature-desc">Premium Chinese TTS voices and Apple Translation built in.</div>
+                <div class="feature-desc">Hear any sentence read aloud with premium Siri Chinese voices at the sentence level. Use built-in Apple Translation for full sentence translations. Train your ear while you read.</div>
+            </div>
+        </div>
+
+        <!-- How It Works -->
+        <div class="how-it-works" id="how-it-works">
+            <h2>How It Works</h2>
+            <p class="subtitle">From import to mastery in four steps</p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Import a Book</h3>
+                    <p>Load an EPUB, PDF, text file, or paste a web URL. Kanshu segments the Chinese text into tappable words automatically.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Read with Tap-to-Learn</h3>
+                    <p>Read naturally, tapping any word you don't know for instant pinyin, definitions, and grammar notes. Toggle pinyin mode for full annotations.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Coach Detects Patterns</h3>
+                    <p>The coach silently observes your lookups, translations, and reading speed. When it spots a grammar pattern you're struggling with, it serves a targeted mini-challenge.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Review & Retain</h3>
+                    <p>Saved words enter the SM-2 spaced repetition queue. Review a few cards daily to move vocabulary from short-term to long-term memory.</p>
+                </div>
             </div>
         </div>
 
@@ -598,10 +698,16 @@
         <div class="section" id="faq">
             <h2 class="section-title">FAQ</h2>
             <ul>
-                <li><strong>What Chinese level do I need?</strong> Kanshu works for all levels — from HSK 1 beginners to advanced readers. Set your HSK level during onboarding and the coach adapts to you.</li>
-                <li><strong>Does it work offline?</strong> Yes. The core reader, dictionary, and grammar notes all work without an internet connection. Cloud AI features are optional.</li>
-                <li><strong>What AI features are available?</strong> On-device AI (Apple Intelligence, iOS 26+) and cloud providers (Claude, OpenAI, Gemini) for contextual grammar explanations. All are optional enhancements.</li>
-                <li><strong>What file formats can I import?</strong> EPUB, PDF, plain text (.txt), and web URLs with automatic encoding detection for Chinese sites.</li>
+                <li><strong>What Chinese level do I need?</strong> Kanshu works for all levels, from HSK 1 beginners to advanced readers. Set your HSK level during onboarding and the coach adapts to you. Your initial choice seeds the pattern confidence model, but it recalibrates quickly based on your actual reading behavior.</li>
+                <li><strong>Does it work offline?</strong> Yes. The core reader, 120,000-entry dictionary, and 20,000+ pre-generated grammar notes all work without an internet connection. On-device Apple Intelligence (iOS 26+) also works offline. Cloud AI features are a powerful optional add-on.</li>
+                <li><strong>What AI features are available?</strong> Three tiers: bundled grammar notes (always available), on-device Apple Intelligence (iOS 26+, no data leaves your device), and cloud AI providers (Claude, OpenAI, Gemini) for rich contextual explanations. The app tries each tier in order and falls back automatically.</li>
+                <li><strong>What file formats can I import?</strong> EPUB (with full chapter structure preserved), PDF (text extraction via PDFKit), plain text (.txt) with auto-detected chapter headings, and web URLs with GB18030 encoding detection for Chinese sites.</li>
+                <li><strong>How does the grammar coaching work?</strong> The coach silently observes your first 8 pages, tracking which words you tap, which grammar you look up, and how long you spend on each page. It maintains a registry of 100+ grammar patterns organized into tiers (foundational, intermediate, advanced) and uses Bayesian confidence scoring to detect your weak areas. When it spots a pattern you're struggling with, it generates a targeted mini-challenge. It never interrupts more than 3 times per session.</li>
+                <li><strong>Can I use my own AI API key?</strong> Yes. Go to Settings, then Cloud AI, and enter your API key for Anthropic Claude, OpenAI, or Google Gemini. Kanshu also supports any OpenAI-compatible endpoint, so you can point it at a self-hosted model. Your API keys are stored locally on your device and never sent to us.</li>
+                <li><strong>What's the difference between the segmentation engines?</strong> Kanshu offers three engines. CC-CEDICT uses a 120k-entry dictionary with bidirectional maximum matching — best for complete dictionary info on every word. Apple NL uses Apple's NLTokenizer for natural word boundaries that match how native speakers read. Jieba uses statistical HMM segmentation — best for texts with slang, internet language, or neologisms.</li>
+                <li><strong>Can I export my word list?</strong> Yes. You can export your saved words in Pleco format, which works with Pleco and other Chinese learning apps. Access the export option from your word list in the library.</li>
+                <li><strong>Does it support traditional Chinese?</strong> The dictionary and reader handle both simplified and traditional characters. The CC-CEDICT dictionary includes traditional character entries. Segmentation works with both character sets.</li>
+                <li><strong>What devices and iOS versions are supported?</strong> Kanshu requires iOS 17.4 or later. On-device AI features (Apple Intelligence) require iOS 26+ and supported hardware. The app runs on iPhone and iPad.</li>
             </ul>
         </div>
 
