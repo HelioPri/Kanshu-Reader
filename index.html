@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="scroll-behavior: smooth; scroll-padding-top: 60px;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,6 +45,67 @@
             color: var(--text);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
+        }
+
+        /* Nav */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 251, 247, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 100%;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .nav {
+                background: rgba(26, 15, 8, 0.85);
+            }
+        }
+
+        .nav-brand {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-brand img {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        @media (max-width: 480px) {
+            .nav-links { gap: 12px; }
+            .nav-links a { font-size: 13px; }
         }
 
         /* Hero */
@@ -361,6 +422,19 @@
 </head>
 <body>
 
+    <!-- Nav -->
+    <nav class="nav">
+        <a href="#" class="nav-brand">
+            <img src="icon.png" alt="Kanshu"> Kanshu
+        </a>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#screenshots">Screenshots</a>
+            <a href="#faq">FAQ</a>
+            <a href="privacy.html">Privacy</a>
+        </div>
+    </nav>
+
     <!-- Hero -->
     <section class="hero">
         <div class="hero-inner">
@@ -392,7 +466,7 @@
     <div class="container">
 
         <!-- Features -->
-        <div class="features">
+        <div class="features" id="features">
             <div class="feature">
                 <div class="feature-icon">📖</div>
                 <div class="feature-title">Tap to Learn</div>
@@ -426,7 +500,7 @@
         </div>
 
         <!-- Screenshot Gallery -->
-        <div class="gallery-section">
+        <div class="gallery-section" id="screenshots">
             <div class="gallery-header">
                 <h2>See It in Action</h2>
                 <p>Scroll through the full experience</p>
@@ -520,7 +594,7 @@
         </div>
 
         <!-- FAQ -->
-        <div class="section">
+        <div class="section" id="faq">
             <h2 class="section-title">FAQ</h2>
             <ul>
                 <li><strong>What Chinese level do I need?</strong> Kanshu works for all levels — from HSK 1 beginners to advanced readers. Set your HSK level during onboarding and the coach adapts to you.</li>
